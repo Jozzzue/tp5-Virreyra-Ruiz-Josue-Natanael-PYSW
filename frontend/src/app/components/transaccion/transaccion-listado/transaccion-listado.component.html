@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4 p-2 px-lg-4 pt-5">
+            <div class="row d-flex justify-content-center mb-3" (click)="mostrarFormFiltrado1 = !mostrarFormFiltrado1">
+                <a class="col-6 btn btn-outline-success rounded-5">Filtrar Por Divisas</a>
+            </div>
+            <form class="col-12 p-4 bg-dark mx-1 my-3 rounded-3 form-shadow" *ngIf="mostrarFormFiltrado1 == true" #transaccionForm="ngForm">
+                <h4 class="text-center text-white">FILTRAR POR DIVISAS</h4>
+                <hr class="text-white-50">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="monedaOrigen" name="monedaOrigen" required
+                        [(ngModel)]="monedaOrigen" #origen="ngModel" placeholder="a">
+                    <label for="monedaOrigen" class="text-black-50">Moneda Origen</label>
+                    <div *ngIf="origen.invalid && (origen.dirty || origen.touched)"
+                        class="alert alert-danger py-1 px-2 text-danger small">
+                        <div *ngIf="origen.errors?.['required']"
+                            class="d-flex justify-content-between align-items-center">
+                            moneda origen requerida
+                            <i class="bi bi-exclamation-circle fs-5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="monedaDestino" name="monedaDestino" required
+                        [(ngModel)]="monedaDestino" #destino="ngModel" placeholder="a">
+                    <label for="monedaDestino" class="text-black-50">Moneda Destino</label>
+                    <div *ngIf="destino.invalid && (destino.dirty || destino.touched)"
+                        class="alert alert-danger py-1 px-2 text-danger small">
+                        <div *ngIf="destino.errors?.['required']"
+                            class="d-flex justify-content-between align-items-center">
+                            moneda destino requerida
+                            <i class="bi bi-exclamation-circle fs-5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid text-center">
+                    <button class="btn btn-success me-3" [disabled]="transaccionForm.invalid"
+                        (click)="filtrarTransaccionesPorDivisas()">Filtrar</button>
+                </div>
+            </form>
+            <div class="row d-flex justify-content-center mb-3" (click)="mostrarFormFiltrado2 = !mostrarFormFiltrado2">
+                <a class="col-6 btn btn-outline-success rounded-5">Filtrar Por Cliente</a>
+            </div>
+            <form class="col-12 p-4 bg-dark mx-1 my-3 rounded-3 form-shadow" *ngIf="mostrarFormFiltrado2 == true" #transaccionForm1="ngForm">
+                <h4 class="text-center text-white">FILTRAR POR CLIENTE</h4>
+                <hr class="text-white-50">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="correoCliente" name="correoCli" required
+                        [(ngModel)]="email" #cliente="ngModel" placeholder="a">
+                    <label for="correoCliente" class="text-black-50">Correo Electronico</label>
+                    <div *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)"
+                        class="alert alert-danger py-1 px-2 text-danger small">
+                        <div *ngIf="cliente.errors?.['required']"
+                            class="d-flex justify-content-between align-items-center">
+                            correo requerido
+                            <i class="bi bi-exclamation-circle fs-5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid text-center">
+                    <button class="btn btn-success me-3" [disabled]="transaccionForm1.invalid"
+                        (click)="filtrarTransaccionesPorCliente()">Filtrar</button>
+                </div>
+            </form>
+            <div class="row d-flex justify-content-center mb-3" >
+                <a class="col-6 btn btn-outline-success rounded-5" (click)="obtenerTransacciones()">Ver Todas</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 p-4 p-lg-4 overflow-auto">
+            <!-- <ngx-datatable class="bootstrap" [rows]="transacciones" [columns]="columns">
+            </ngx-datatable>
+           -->
+            <div class="d-flex justify-content-start">
+                <h3>Transacciones </h3>
+            </div>
+            <table class="table table-bordered table-dark text-center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Moneda Origen</th>
+                        <th>Moneda Destino</th>
+                        <th>Cantidad Origen</th>
+                        <th>Cantidad Destino</th>
+                        <th>Tasa de Conversion</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="mostrarTransacciones == true">
+                    <tr *ngFor="let t of transacciones">
+                        <td>{{t._id}}</td>
+                        <td>{{t.monedaOrigen}}</td>
+                        <td>{{t.monedaDestino}}</td>
+                        <td>{{t.cantidadOrigen}}</td>
+                        <td>{{t.cantidadDestino}}</td>
+                        <td>{{t.tasaConversion}}</td>
+                        <td>{{t.emailCliente}}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="mostrarTransaccionesPorDivisas == true">
+                    <tr *ngFor="let t of transaccionesPorDivisas">
+                        <td>{{t._id}}</td>
+                        <td>{{t.monedaOrigen}}</td>
+                        <td>{{t.monedaDestino}}</td>
+                        <td>{{t.cantidadOrigen}}</td>
+                        <td>{{t.cantidadDestino}}</td>
+                        <td>{{t.tasaConversion}}</td>
+                        <td>{{t.emailCliente}}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="mostrarTransaccionesPorCliente == true">
+                    <tr *ngFor="let t of transaccionesPorCliente">
+                        <td>{{t._id}}</td>
+                        <td>{{t.monedaOrigen}}</td>
+                        <td>{{t.monedaDestino}}</td>
+                        <td>{{t.cantidadOrigen}}</td>
+                        <td>{{t.cantidadDestino}}</td>
+                        <td>{{t.tasaConversion}}</td>
+                        <td>{{t.emailCliente}}</td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div>

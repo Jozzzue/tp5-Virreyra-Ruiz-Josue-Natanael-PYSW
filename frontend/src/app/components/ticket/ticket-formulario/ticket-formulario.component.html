@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-7 mx-1 mt-5 mb-1 alert alert-success alert-dismissible fade show" role="alert" *ngIf="alertaTicket">
+            <strong>{{alertaTicket}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form class="col-12 col-md-7 p-3 bg-dark mx-1 my-3 rounded-3 form-shadow" #ticketForm="ngForm">
+            <h3 class="text-center text-white" *ngIf="accion == 'new'">REGISTRAR TICKET</h3>
+            <h3 class="text-center text-white" *ngIf="accion == 'update'">MODIFICAR TICKET</h3>
+            <hr class="text-white-50">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="ticketEspect" name="ticketEspect" required
+                    [(ngModel)]="ticket.espectador" #ticketEspect="ngModel" placeholder="a">
+                <label for="ticketEspect" class="text-black-50">Ingrese ID espectador: (puede seleccionarla de la
+                    lista)</label>
+                <div *ngIf="ticketEspect.invalid && (ticketEspect.dirty || ticketEspect.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="ticketEspect.errors?.['required']"
+                        class="d-flex justify-content-between align-items-center">
+                        El ID es requerido
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="precioTicket" name="precioTicket" required
+                    [(ngModel)]="ticket.precio" #precioTicket="ngModel" min="1" placeholder="I"
+                    (input)="calcularDescuento()">
+                <label for="precioTicket" class="form-label">Precio</label>
+
+                <div *ngIf="precioTicket.invalid && (precioTicket.dirty || precioTicket.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="precioTicket.errors?.['required']"
+                        class="d-flex justify-content-between align-items-center">
+                        Precio del ticket es requerido.
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                    <div *ngIf="precioTicket.errors?.['min']" class="d-flex justify-content-between align-items-center">
+                        Valor inválido!
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="localRadio" name="categoria" value="l"
+                        [(ngModel)]="ticket.categoriaEspectador" (change)="calcularDescuento()">
+                    <label class="form-check-label text-white" for="localRadio">Local</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="extranjeroRadio" name="categoria" value="e"
+                        [(ngModel)]="ticket.categoriaEspectador" (change)="calcularDescuento()" checked>
+                    <label class="form-check-label text-white" for="extranjeroRadio">Extranjero</label>
+                </div>
+            </div>
+
+
+            <div class="mb-3" *ngIf="precioFinal">
+                <label for="precioCobrado" class="form-label text-white">Precio Final</label>
+                <input type="text" class="form-control" id="precioCobrado" name="precioCobrado" readonly
+                    [value]="precioFinal | currency">
+            </div>
+
+
+
+
+            <div class="mb-3 text-center">
+                <button class="btn btn-outline-success me-4" (click)="registrarTicket()" [disabled]="ticketForm.invalid"
+                    *ngIf="accion == 'new'">Registrar</button>
+                <button class="btn btn-outline-success me-4" (click)="modificarTicket()" [disabled]="ticketForm.invalid"
+                    *ngIf="accion == 'update'">Modificar</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-12 p-1 overflow-auto">
+            <div class="text-center">
+                <h3>Espectadores</h3>
+            </div>
+            <table class="table table-bordered bg-info text-center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Dni</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let espectador of espectadores">
+                        <td>
+                            {{ espectador._id }}
+                            <a class="btn btn-dark p-1 float-end" (click)=" ticket.espectador = espectador._id">
+                                <i class="bi bi-clipboard"></i>
+                            </a>
+                        </td>
+                        <td>{{ espectador.nombre }}</td>
+                        <td>{{ espectador.apellido }}</td>
+                        <td>{{ espectador.dni}}</td>
+                        <td>{{ espectador.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

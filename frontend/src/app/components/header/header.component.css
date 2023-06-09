@@ -1,0 +1,27 @@
+.underline-text {
+    color: rgb(40, 167, 69);
+    position: relative;
+  }
+  
+  .underline-text::before,
+  .underline-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: rgb(40, 167, 69);
+  }
+  
+  .underline-text::before {
+    width: 50%;
+  }
+  
+  .underline-text::after {
+    width: 100%;
+  }
+  .dropdown-item:focus {
+    background-color: rgb(40, 167, 69);
+  }
+    

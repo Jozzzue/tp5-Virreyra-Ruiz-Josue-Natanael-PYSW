@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand">TP5</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-lg-flex justify-content-center " id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown" [ngClass]="{'active bg-success rounded-1': isProductActive()}">
+          <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bag-fill"></i> Productos
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['productoformulario']">
+                <span><i class="bi bi-plus"></i> Añadir</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['productolistado']">
+                <span><i class="bi bi-star-fill"></i> Mostrar Destacados</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" [ngClass]="{'active bg-success rounded-1': isTransactionActive()}">
+          <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-currency-exchange"></i> Transaccion 
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['transaccionformulario']">
+                <span><i class="bi bi-plus"></i> Añadir</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['transaccionlistado']">
+                <span><i class="bi bi-list"></i> Mostrar/Filtrar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" [ngClass]="{'active bg-success rounded-1': isTicketActive()}">
+          <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-ticket-perforated-fill"></i> Ticket
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['ticketformulario/0']">
+                <span><i class="bi bi-plus"></i> Añadir</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLinkActive="underline-text" [routerLink]="['ticketlistado']">
+                <span><i class="bi bi-list"></i> Mostrar/Filtrar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

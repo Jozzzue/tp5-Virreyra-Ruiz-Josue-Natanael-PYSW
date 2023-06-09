@@ -1,0 +1,91 @@
+<div class="container d-flex justify-content-center">
+    <div class="row col-6">
+        <div class="col-12 mx-1 mt-5 mb-1 alert alert-success alert-dismissible fade show" role="alert" *ngIf="alerta">
+            <strong>{{alerta}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form class="col-12  p-4 bg-dark mx-1 my-3 rounded-3 form-shadow" #productoForm="ngForm">
+            <h2 class="text-center text-white">REGISTRAR PRODUCTO</h2>
+            <hr class="text-white-50">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="nombre" name="nombre" required
+                    [(ngModel)]="productoNuevo.nombre" #nombre="ngModel" placeholder="a">
+                <label for="nombre" class="text-black-50">Ingrese el nombre del producto</label>
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="nombre.errors?.['required']" class="d-flex justify-content-between align-items-center">
+                        el nombre es requerido
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required
+                    [(ngModel)]="productoNuevo.descripcion" #descripcion="ngModel" placeholder="a">
+                <label for="descripcion" class="text-black-50">Ingrese la descripción del producto</label>
+                <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="descripcion.errors?.['required']"
+                        class="d-flex justify-content-between align-items-center">
+                        La descripcion es requerida
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="imagen" name="imagen" required placeholder="a"
+                    [(ngModel)]="productoNuevo.imagen" #imagen="ngModel">
+                <label for="imagen" class="text-black-50">Imagen</label>
+                <div *ngIf="imagen.invalid && (imagen.dirty || imagen.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="imagen.errors?.['required']" class="d-flex justify-content-between align-items-center">
+                        la imagen es requerida
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="precio" name="precio" required placeholder="a"
+                    [(ngModel)]="productoNuevo.precio" #precio="ngModel" min="1">
+                <label for="precio" class="text-black-50">Precio</label>
+                <div *ngIf="precio.invalid && (precio.dirty || precio.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="precio.errors?.['required']" class="d-flex justify-content-between align-items-center">
+                        el precio es requerido
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                    <div *ngIf="precio.errors?.['min']" class="d-flex justify-content-between align-items-center">
+                        valor inválido!
+                        <i class="bi bi-x-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="stock" name="stock" required
+                    [(ngModel)]="productoNuevo.stock" #stock="ngModel" min="1" placeholder="a">
+                <label for="stock" class="text-black-50">Stock</label>
+                <div *ngIf="stock.invalid && (stock.dirty || stock.touched)"
+                    class="alert alert-danger py-1 px-2 text-danger small">
+                    <div *ngIf="stock.errors?.['required']" class="d-flex justify-content-between align-items-center">
+                        el stock es requerido
+                        <i class="bi bi-exclamation-circle fs-5"></i>
+                    </div>
+                    <div *ngIf="stock.errors?.['min']" class="d-flex justify-content-between align-items-center">
+                        valor inválido!
+                        <i class="bi bi-x-circle fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-check mb-3">
+                <label class="form-check-label text-white" for="destacado">Destacado</label>
+                <input class="form-check-input" type="checkbox" id="destacado" name="destacado"
+                    [(ngModel)]="productoNuevo.destacado">
+            </div>
+            <div class="container-fluid text-center">
+                <button class="btn btn-success me-3" [disabled]="productoForm.invalid"
+                    (click)="agregarProducto()">Guardar</button>
+                <button class="btn btn-danger">Volver</button>
+            </div>
+        </form>
+    </div>
+</div>
