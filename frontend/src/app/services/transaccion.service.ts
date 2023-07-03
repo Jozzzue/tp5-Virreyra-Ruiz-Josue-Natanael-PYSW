@@ -43,7 +43,7 @@ export class TransaccionService {
   getCurrencyCodes(): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'X-RapidAPI-Key': 'a7876310d9msh949fcc13cab1197p1ae733jsne1c8d6267885',
+        'X-RapidAPI-Key': 'api key',
         'X-RapidAPI-Host': 'currency-converter18.p.rapidapi.com'
       })
     }
