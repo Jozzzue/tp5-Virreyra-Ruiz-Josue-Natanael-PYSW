@@ -3,4 +3,4 @@ TP5 - Programacion y Servicios Web
 
 Alumno: Virreyra Ruiz Josue Natanael
 
-( sin carpetas 'node_modules')
+( instalar dependencias back y front: npm install )
