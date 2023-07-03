@@ -13,7 +13,7 @@ export class TransaccionService {
   getConversion(from: string, to: string, amount: number): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'X-RapidAPI-Key': 'a7876310d9msh949fcc13cab1197p1ae733jsne1c8d6267885',
+        'X-RapidAPI-Key': 'aca va tu papi key xd',
         'X-RapidAPI-Host': 'currency-converter18.p.rapidapi.com'
       }),
       params: new HttpParams()
